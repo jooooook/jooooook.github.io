@@ -24,7 +24,7 @@
 <meta property="og:description" content="iocp异步编程流程 创建I&#x2F;O完成端口: 使用CreateIoCompletionPort函数创建一个I&#x2F;O完成端口。这个端口将作为异步操作完成时的通知中心，需要与套接字关联。  HANDLE CreateIoCompletionPort(  HANDLE FileHandle,  HANDLE ExistingCompletionPort,  ULONG_PTR Compl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-25T17:06:19.000Z">
-<meta property="article:modified_time" content="2024-07-30T14:58:43.361Z">
+<meta property="article:modified_time" content="2024-07-30T15:13:17.541Z">
 <meta property="article:author" content="Chen Jin">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -363,7 +363,7 @@
 <li><strong>平台特定</strong>：<code>AcceptEx</code>是Windows特有的，而<code>accept</code>则是POSIX标准的一部分，跨平台兼容性更好。</li>
 </ol>
 <h1 id="设置重叠io的技巧"><a href="#设置重叠io的技巧" class="headerlink" title="设置重叠io的技巧"></a>设置重叠io的技巧</h1><p>​	重叠io是关联了一个客户端连接的，具体的可以关联到一个客户端的某个操作，包括发送、接受、创建和关闭，也就是说重叠io是跟某一个客户端关联的，所以我们可以在重叠io这里设置了一个类，类里面的第一个成员变量是重叠io，后面的成员变量客户端连接的状态信息，包括客户端连接的上下文信息，I&#x2F;O操作类型，实际接受到的字节数，数据缓冲区这些信息。这样的话，在收到完成端口传出来的重叠io的时候就可以进行类型转换，然后得到这个客户端连接的状态信息。</p>
-<p>​	对于不同操作对应的重叠io，我是把它设置为一个重叠io的派生类，包括发送，接受，创建，关闭这四个派生类，派生类里面的关键是一个回调函数，每个操作都会有一个回调函数。</p>
+<p>​	对于不同操作对应的重叠io，可以把它设置为一个重叠io的派生类，包括发送，接受，创建，关闭这四个派生类，派生类里面的关键是一个回调函数，每个操作都会有一个回调函数。</p>
 
                 
               </div>
