@@ -4,6 +4,149 @@
   
   
   <entry>
+    <title>C++类中使用成员初始化列表和构造函数内赋值的区别</title>
+    <link href="/2024/07/31/C-%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%85%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <url>/2024/07/31/C-%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%85%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-类中使用成员初始化列表和构造函数内赋值的区别："><a href="#C-类中使用成员初始化列表和构造函数内赋值的区别：" class="headerlink" title="C++类中使用成员初始化列表和构造函数内赋值的区别："></a>C++类中使用成员初始化列表和构造函数内赋值的区别：</h1><p><strong>注意事项：初始化顺序应该是成员变量声明顺序</strong></p><p><strong>1、效率高：</strong></p><p>​<strong>成员初始化列表</strong>：构造并初始化；</p><p>​<strong>构造函数内赋值</strong>：构造后给个默认值（初始化），赋值</p><p><strong>2、有些时候必须使用初始化列表</strong></p><ul><li><p>当我们初始化<code>const</code>或引用类型成员变量，因为这些类型的成员在构造函数体执行前必须已经初始化</p><ul><li><strong><code>const</code> 成员</strong>：一旦被构造，<code>const</code> 成员的值就不能改变，因此它必须在构造过程中立即获得其最终值。如果没有在成员初始化列表中初始化，就没有其他机会对其进行赋值操作。</li><li><strong>引用成员</strong>：引用必须在定义时被初始化，并且一旦指向一个对象，就不能再指向另一个对象。因此，引用成员也必须在构造函数的成员初始化列表中被初始化。</li></ul></li><li><p>对于继承自其他类的对象，如果基类没有默认构造函数，必须在初始化列表中明确调用基类的某个构造函数。</p><ul><li>构造函数体内的代码是在所有成员（包括从基类继承的成员）已经被构造之后才会执行。因此，基类的构造函数必须在派生类任何成员初始化之前被调用，以保证基类的部分已经正确构造。这只能通过初始化列表来完成。</li></ul></li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>当调用某个类实例的成员函数的时候，编译器怎么工作的</title>
+    <link href="/2024/07/31/%E5%BD%93%E8%B0%83%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B1%BB%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/"/>
+    <url>/2024/07/31/%E5%BD%93%E8%B0%83%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B1%BB%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/</url>
+    
+    <content type="html"><![CDATA[<h1 id="当调用某个类实例的成员函数的时候，编译器怎么工作的"><a href="#当调用某个类实例的成员函数的时候，编译器怎么工作的" class="headerlink" title="当调用某个类实例的成员函数的时候，编译器怎么工作的"></a>当调用某个类实例的成员函数的时候，编译器怎么工作的</h1><p>​当你调用一个对象的成员函数时，编译器在源代码编译阶段和运行时阶段的操作是不同的。以下是这个过程的详细解释：</p><p>编译阶段：</p><ol><li><strong>确定函数地址</strong>：编译器在编译阶段会为所有函数生成代码。每个类的成员函数都具有一个唯一的地址，在编译时确定。编译器将这个地址与函数名和其所在类的类型结合在一起，存储在一个表（<strong>符号表</strong>）中。</li><li><strong>类型检查</strong>：当你在源代码中调用一个对象的成员函数时，编译器会进行类型检查，确保你调用的函数在该类型的对象上确实存在，并且你使用的参数和返回类型也是正确的。</li></ol><p>运行时阶段：</p><ol><li><strong>找到函数地址</strong>：运行时根据编译阶段存储的信息，确定所要调用的函数地址。</li><li><strong>进行函数调用</strong>：在调用函数时，需要创建一个新的栈帧以存储函数的局部变量和参数。同时，编译器还会将特殊的 “this” 指针作为隐含参数传递给成员函数。”this” 指针指向的是正在调用该成员函数的对象实例。这样，成员函数就可以访问它所属的对象实例的成员变量了。</li></ol>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>static成员函数在调用时找到static成员变量的原理</title>
+    <link href="/2024/07/31/static%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%BE%E5%88%B0static%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E7%90%86/"/>
+    <url>/2024/07/31/static%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%BE%E5%88%B0static%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="static成员函数在调用时找到static成员变量的原理"><a href="#static成员函数在调用时找到static成员变量的原理" class="headerlink" title="static成员函数在调用时找到static成员变量的原理"></a>static成员函数在调用时找到static成员变量的原理</h1><p>​首先，所有的static成员变量（无论是在类中还是在函数中声明的）都被存储在程序的一个特殊区域，即静态存储区。每个static变量在内存中都有一个固定的地址。</p><p>​当你在static成员函数中使用这个static成员变量时，编译器会替换掉这个变量的引用，直接用这个变量在内存中的地址，这样就可以直接访问到这个变量。编译器在编译程序的时候，已经知道了所有static成员变量的内存地址，所以可以在编译时就直接将这些地址硬编码到生成的代码中。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>类中动态内存相关问题</title>
+    <link href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"/>
+    <url>/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="类中动态内存相关问题"><a href="#类中动态内存相关问题" class="headerlink" title="类中动态内存相关问题"></a>类中动态内存相关问题</h1><p>不能在类声明中初始化静态成员变量，因为类声明只是描述了<strong>如何分配内存，但是不实际分配内存</strong>。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。</p><p>+++</p><p>问：为什么要有析构函数？</p><p>答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new所分配的内存。</p><p><strong>类创建中一些特殊的成员函数</strong></p><p>很多类中产生的问题都是由于特殊成员函数引起的，C++自动提供了下面这些成员函数：</p><ol><li>默认构造函数，如果没有定义构造函数</li><li>默认析构函数，如果没有定义</li><li>拷贝构造函数，如果没有定义</li><li>赋值运算符，如果没有定义</li><li>地址运算符，如果没有定义</li></ol><p>其中默认的拷贝构造函数和赋值运算符都是<strong>浅拷贝</strong>，如果类中有用new创建的动态变量，使用默认的会出现两次释放同一指针的问题，指针悬挂，程序乱码等，需要自己实现<strong>深拷贝的拷贝构造函数和赋值运算符</strong></p><p><strong>当在类中使用new时，应该注意一下几点：</strong></p><ol><li>如果在构造函数中用new初始化指针成员，那么在析构函数中应该使用delete</li><li>new和delete必须成对出现</li><li>应该定义一个复制构造函数，通过深拷贝将一个对象初始化为另一个对象</li><li>重载一个赋值运算符，通过深拷贝将一个对象复制给另一个对象。</li></ol>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>类继承的问题</title>
+    <link href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <url>/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h2 id="基类与派生类特性"><a href="#基类与派生类特性" class="headerlink" title="基类与派生类特性"></a>基类与派生类特性</h2><p>创建派生类对象时，程序首先创建基类对象，也就是说<strong>基类对象应当在程序进入派生类构造函数之前被创建</strong>。c++使用成员初始化列表来完成。</p><p><strong>总结一下有关派生类构造函数的要点：</strong></p><ol><li>创建派生类对象前先创建基类对象</li><li>派生类构造函数应该通过成员初始化列表将基类信息传递给基类构造函数</li><li><strong>派生类构造函数应该初始化新增的数据成员</strong></li></ol><p>释放对象的顺序与创建对象的顺序相反，即首先执行派生类的析构函数，然后执行基类的析构函数</p><hr><p><strong>派生类与基类之间有一些特殊的关系：</strong></p><ol><li><p>派生类对象可以使用基类的方法，条件是该方法不是私有的</p></li><li><p>基类指针可以在不进行显式类型转换的情况下指向派生类对象</p></li><li><p>基类引用可以在不进行显式类型转换的情况下引用派生类对象</p></li></ol><blockquote><p>注意事项：基类指针或引用确实可以指向派生类的对象，并且通过基类指针或引用，我们可以访问派生类中继承自基类的公有成员。但是如果派生类中重写了基类的函数那么，通过基类指针或引用调用该函数时，调用的具体版本（是基类的还是派生类的）取决于这个函数是否被声明为<code>virtual</code>。</p><ol><li>如果基类中的函数被声明为<code>virtual</code>，那么，当通过基类指针或引用调用该函数时，会调用对应的派生类版本（如果派生类中有重写该函数的话）。这被称作动态绑定或运行时多态性。</li><li>如果基类函数并未被声明为<code>virtual</code>，那么就没有动态绑定，只会调用基类版本不管指针或者引用是否指向派生类的实例。</li></ol></blockquote>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vector中的下标访问[]和at()</title>
+    <link href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/"/>
+    <url>/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vector中的下标访问-和at-有何不同"><a href="#vector中的下标访问-和at-有何不同" class="headerlink" title="vector中的下标访问[]和at()有何不同"></a>vector中的下标访问[]和at()有何不同</h1><p><strong>下标运算符 <code>[]</code></strong></p><p>不进行边界检查，如果提供的索引超出范围，会导致未定义行为，导致程序崩溃</p><p><strong>成员函数 <code>at()</code></strong></p><p>访问元素之前会进行边界检查，如果提供的索引超出范围，会抛出 <code>std::out_of_range</code> 异常。</p><p>抛出异常可以使用try&#x2F;catch捕获和处理，try放可能异常的代码，catch捕获然后打印信息</p><p>相对于未定义行为，捕获异常更容易调试，定位问题</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>reserve和resize的区别</title>
+    <link href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <url>/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="reserve和resize的区别"><a href="#reserve和resize的区别" class="headerlink" title="reserve和resize的区别"></a>reserve和resize的区别</h1><p><code>reserve()</code>函数用于预先分配足够的内存，以容纳指定数量的元素，但不会实际创建或初始化这些元素。它的主要目的是避免在多次添加元素时频繁地重新分配内存，从而提高性能。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::vector&lt;<span class="hljs-type">int</span>&gt; v;<br>v.<span class="hljs-built_in">reserve</span>(<span class="hljs-number">100</span>); <span class="hljs-comment">// 预分配内存，但不初始化元素</span><br></code></pre></td></tr></table></figure><ul><li>如果<code>n</code>大于当前的<code>vector</code>容量，<code>vector</code>将分配足够的内存，以至少容纳<code>n</code>个元素。</li><li>如果<code>n</code>小于或等于当前的容量，<code>vector</code>的容量不会改变。</li><li><code>vector</code>的大小（元素数量）不会改变。</li></ul><p><code>resize()</code>函数则会改变<code>vector</code>的实际大小，即元素的数量。</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">void</span> <span class="hljs-built_in">resize</span>(size_type n);<br><span class="hljs-keyword">void</span> <span class="hljs-built_in">resize</span>(size_type n, value_type val);<br></code></pre></td></tr></table></figure><ul><li><code>vector</code>的大小将被设定为<code>n</code>。</li><li>如果<code>n</code>大于当前大小，<code>vector</code>将被扩展，并且新添加的元素将被初始化为<code>val</code>（如果没有指定<code>val</code>，则使用默认值初始化）。</li><li>如果<code>n</code>小于当前大小，<code>vector</code>的末尾元素将被删除，直到大小等于<code>n</code>。</li></ul><p>总结：</p><ul><li><code>reserve()</code>只改变<code>vector</code>的容量，而不改变其大小，主要用于性能优化，避免不必要的内存重新分配。</li><li><code>resize()</code>改变<code>vector</code>的大小，可能会初始化新元素或删除现有元素，用于改变<code>vector</code>中元素的数量。</li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>const在成员函数的前后作用</title>
+    <link href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/"/>
+    <url>/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="const在成员函数的前后作用"><a href="#const在成员函数的前后作用" class="headerlink" title="const在成员函数的前后作用"></a>const在成员函数的前后作用</h1><p>const在<strong>后面</strong>，表示这个成员函数<strong>不会修改成员变量</strong>，即这是一个常量的成员函数，修饰成员函数的属性；</p><p>const在<strong>前面</strong>，表示<strong>返回的引用不能被修改</strong>，不能通过返回的引用来修改成员变量。即返回值是const，修饰的是返回的变量。</p><p><strong>注意</strong>：<strong>常量只能调用常量的成员函数</strong>，不能调用非常量的成员函数。而非常量的成员函数可以调用非常量和常量的成员函数。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>大Vector作为局部变量返回注意事项</title>
+    <link href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <url>/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+    
+    <content type="html"><![CDATA[<h1 id="大Vector作为局部变量返回注意事项"><a href="#大Vector作为局部变量返回注意事项" class="headerlink" title="大Vector作为局部变量返回注意事项"></a>大Vector作为局部变量返回注意事项</h1><p>1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">functionWithMoveReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; myVector = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br>    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">move</span>(myVector);<br>&#125;<br><br></code></pre></td></tr></table></figure><p>2、防止栈溢出，可以把他分配在堆上，然后返回引用</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; <span class="hljs-title">functionWithRefReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt;* myVector = <span class="hljs-keyword">new</span> std::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;);<br>    <span class="hljs-keyword">return</span> *myVector;<br>&#125;<br><br><span class="hljs-comment">// 在使用完引用后手动释放内存</span><br>std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; returnedVector = <span class="hljs-built_in">functionWithRefReturn</span>();<br><span class="hljs-comment">// 使用returnedVector...</span><br><span class="hljs-keyword">delete</span> &amp;returnedVector;<br><br></code></pre></td></tr></table></figure><p>3、把它变为全局或静态变量，这样不会保存在栈上，但是，使用全局变量或静态成员变量需要谨慎使用，因为它们可能会引入全局状态和潜在的并发访问问题。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::vector&lt;<span class="hljs-type">int</span>&gt; myVector = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br><br><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; <span class="hljs-title">functionWithRefReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> myVector;<br>&#125;<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>在Linux中如何通过一行命令找到文件夹里面的关键字</title>
+    <link href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    <url>/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    
+    <content type="html"><![CDATA[<h1 id="在Linux中如何通过一行命令找到文件夹里面的关键字"><a href="#在Linux中如何通过一行命令找到文件夹里面的关键字" class="headerlink" title="在Linux中如何通过一行命令找到文件夹里面的关键字"></a>在Linux中如何通过一行命令找到文件夹里面的关键字</h1><p><strong>1、find单独使用</strong><br><strong>2 、使用find+ xargs 进行操作</strong><br><strong>3、使用grep查找某目录下包含关键字内容的文件</strong></p><h2 id="1、find-单独使用："><a href="#1、find-单独使用：" class="headerlink" title="1、find 单独使用："></a>1、<code>find</code> 单独使用：</h2><p>&#96;&#96;find<code>命令用于在指定目录及其子目录中查找文件。你可以通过</code>-name<code>选项指定要搜索的文件名模式，然后使用</code>-exec&#96; 选项执行相应的操作。</p><p>示例：</p><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs perl">find /path/to/directory -name <span class="hljs-string">&quot;*.txt&quot;</span> -<span class="hljs-keyword">exec</span> <span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;keyword&quot;</span> &#123;&#125; \;<br><span class="hljs-string">``</span><span class="hljs-string">`</span><br><span class="hljs-string"></span><br><span class="hljs-string">解释：</span><br><span class="hljs-string">- `</span>/path/to/directory<span class="hljs-string">` 是要搜索的目录路径。</span><br><span class="hljs-string">- `</span>-name <span class="hljs-string">&quot;*.txt&quot;</span><span class="hljs-string">` 限定搜索的文件名模式为以 `</span>.txt<span class="hljs-string">` 结尾的文件。</span><br><span class="hljs-string">- `</span>-<span class="hljs-keyword">exec</span> <span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;keyword&quot;</span> &#123;&#125; \;<span class="hljs-string">` 在找到的每个文件上执行 `</span><span class="hljs-keyword">grep</span><span class="hljs-string">` 命令，查找包含关键字 &quot;keyword&quot; 的行。</span><br></code></pre></td></tr></table></figure><h2 id="2、使用-find-xargs-进行操作："><a href="#2、使用-find-xargs-进行操作：" class="headerlink" title="2、使用 find + xargs 进行操作："></a>2、使用 <code>find + xargs</code> 进行操作：</h2><p>&#96;&#96;xargs<code>命令用于从标准输入中读取数据，并将其作为参数传递给其他命令。结合</code>find<code>和</code>xargs&#96; 可以在文件较多时提高效率。</p><p>示例：</p><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">find /path/to/directory -name <span class="hljs-string">&quot;*.txt&quot;</span> -print0 | xargs -<span class="hljs-number">0</span> grep <span class="hljs-string">&quot;keyword&quot;</span><br>```<br><br>解释：<br>- `-print0` 选项用于将 `find` 命令的输出以 null 字符分隔，确保处理文件名中包含空格或特殊字符的情况。<br>- `-<span class="hljs-number">0</span>` 选项用于告知 `xargs` 命令以 null 字符作为分隔符进行参数传递。<br>- `grep <span class="hljs-string">&quot;keyword&quot;</span>` 是要在找到的文件中查找的关键字。<br></code></pre></td></tr></table></figure><h2 id="3、使用-grep-查找某目录下包含关键字内容的文件："><a href="#3、使用-grep-查找某目录下包含关键字内容的文件：" class="headerlink" title="3、使用 grep 查找某目录下包含关键字内容的文件："></a>3、使用 <code>grep</code> 查找某目录下包含关键字内容的文件：</h2><p>&#96;&#96;grep&#96; 命令用于在文件中搜索指定模式或关键字，并输出匹配的行。</p><p>示例：</p><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lasso">grep <span class="hljs-params">-r</span> <span class="hljs-string">&quot;keyword&quot;</span> /path/<span class="hljs-keyword">to</span>/directory<br><span class="hljs-string">``</span><span class="hljs-string">`</span><br><span class="hljs-string"></span><br><span class="hljs-string">解释：</span><br><span class="hljs-string">- `</span><span class="hljs-params">-r</span><span class="hljs-string">` 选项用于递归地搜索指定目录下的文件和子目录。</span><br><span class="hljs-string">- `</span><span class="hljs-string">&quot;keyword&quot;</span><span class="hljs-string">` 是要查找的关键字。</span><br><span class="hljs-string">- `</span>/path/<span class="hljs-keyword">to</span>/directory<span class="hljs-string">` 是要搜索的目录路径。</span><br></code></pre></td></tr></table></figure><p>注意：以上命令的示例中，关键字 “keyword” 可替换为你要查找的实际关键字，而 <code>/path/to/directory</code> 可替换为要搜索的实际目录路径。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>单例模式的设计</title>
+    <link href="/2024/07/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1/"/>
+    <url>/2024/07/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>意图：保证每一个类仅有<strong>一个实例</strong>，并为它提供一个<strong>全局访问</strong>点。（一些管理功能的类，需要统筹全局）</p><p><strong>如何保证单例模式是线程安全的</strong></p><ol><li><p>使用<strong>双重检查锁</strong>，先检查是否被初始化，然后在上锁，然后在检查是否被初始化，没有被初始化就初始化在返回。</p></li><li><p>使用静态局部变量，因为C++11中静态变量的初始化时线程安全的，具体而言，静态局部变量的初始化保证只发生一次，并且这个初始化过程是线程安全的。这意味着，即使多个线程同时访问同一个静态局部变量，它的初始化也只会执行一次，并且不会引起竞态条件。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br><span class="hljs-function"><span class="hljs-type">static</span> T&amp; <span class="hljs-title">Instance</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">if</span> (<span class="hljs-literal">NULL</span> == value_)<br>&#123;<br>value_ = <span class="hljs-keyword">new</span> <span class="hljs-built_in">T</span>();<br>&#125;<br><span class="hljs-keyword">return</span> *value_;<br>&#125;<br><br><span class="hljs-keyword">private</span>:<br><span class="hljs-built_in">Singleton</span>();<br>~<span class="hljs-built_in">Singleton</span>();<br><br><span class="hljs-built_in">Singleton</span>(<span class="hljs-type">const</span> Singleton&amp;);<br>Singleton&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Singleton&amp;);<br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>value_ = <span class="hljs-keyword">new</span> <span class="hljs-built_in">T</span>();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">delete</span> value_;<br>&#125;<br><br><span class="hljs-keyword">private</span>:<br><span class="hljs-comment">//static pthread_once_t ponce_;</span><br><span class="hljs-type">static</span> T*             value_;<br>&#125;;<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br>T* Singleton&lt;T&gt;::value_ = <span class="hljs-literal">NULL</span>;<br></code></pre></td></tr></table></figure></li><li><p>可以在单线程模式下把单例类先初始化，比如main函数之前。</p></li></ol>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>http-parser库的使用</title>
     <link href="/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</url>

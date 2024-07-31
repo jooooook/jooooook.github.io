@@ -224,15 +224,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          http-parser库的使用
+        <a href="/2024/07/31/C-%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%85%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          C++类中使用成员初始化列表和构造函数内赋值的区别
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/C-%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%85%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
         <div>
-          http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装
+          C++类中使用成员初始化列表和构造函数内赋值的区别：注意事项：初始化顺序应该是成员变量声明顺序 1、效率高： ​	成员初始化列表：构造并初始化； ​	构造函数内赋值：构造后给个默认值（初始化），赋值 2、有些时候必须使用初始化列表  当我们初始化const或引用类型成员变量，因为这些类型的成员在构造函数体执行前必须已经初始化  const 成员：一旦被构造，const 成员的值就不能改变，因此它必
         </div>
       </a>
 
@@ -240,7 +240,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:34" pubdate>
+            <time datetime="2024-07-31 18:02" pubdate>
               2024-07-31
             </time>
           </div>
@@ -257,15 +257,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" target="_self">
-          连不上云服务器mysql
+        <a href="/2024/07/31/%E5%BD%93%E8%B0%83%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B1%BB%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/" target="_self">
+          当调用某个类实例的成员函数的时候，编译器怎么工作的
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%BD%93%E8%B0%83%E7%94%A8%E6%9F%90%E4%B8%AA%E7%B1%BB%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/" target="_self">
         <div>
-          连不上云服务器mysql原因：mysql只监听了本地回环地址，bind-address &#x3D; 127.0.0.1，可以使用netstat -tulnp | grep mysql命令查看是否是127.0.0.1， 解决步骤：  打开MySQL配置文件。MySQL的配置文件通常位于/etc/mysql/my.cnf或者/etc/mysql/mysql.conf.d/mysqld.cnf 123
+          当调用某个类实例的成员函数的时候，编译器怎么工作的​	当你调用一个对象的成员函数时，编译器在源代码编译阶段和运行时阶段的操作是不同的。以下是这个过程的详细解释： 编译阶段：  确定函数地址：编译器在编译阶段会为所有函数生成代码。每个类的成员函数都具有一个唯一的地址，在编译时确定。编译器将这个地址与函数名和其所在类的类型结合在一起，存储在一个表（符号表）中。 类型检查：当你在源代码中调用一个对象的成
         </div>
       </a>
 
@@ -273,7 +273,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:32" pubdate>
+            <time datetime="2024-07-31 18:01" pubdate>
               2024-07-31
             </time>
           </div>
@@ -290,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
-          windows中使用socket
+        <a href="/2024/07/31/static%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%BE%E5%88%B0static%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E7%90%86/" target="_self">
+          static成员函数在调用时找到static成员变量的原理
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/static%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%BE%E5%88%B0static%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E7%90%86/" target="_self">
         <div>
-          windows中使用socket前需要使用WSAStratup函数WSAStartup()函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。 12345WSAData wsa;//Winsock版本2.2//1.1早期版本，功能不足，现在一般使用2.2WSAStartup(MAKEWORD(2, 2), &amp;wsa);  WSACleanu
+          static成员函数在调用时找到static成员变量的原理​	首先，所有的static成员变量（无论是在类中还是在函数中声明的）都被存储在程序的一个特殊区域，即静态存储区。每个static变量在内存中都有一个固定的地址。 ​	当你在static成员函数中使用这个static成员变量时，编译器会替换掉这个变量的引用，直接用这个变量在内存中的地址，这样就可以直接访问到这个变量。编译器在编译程序的时候，
         </div>
       </a>
 
@@ -306,7 +306,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:30" pubdate>
+            <time datetime="2024-07-31 18:00" pubdate>
               2024-07-31
             </time>
           </div>
@@ -323,15 +323,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
-          内存中的“cc”
+        <a href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
+          类中动态内存相关问题
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          内存中的“cc”代表的是十六进制数 0xCC，在汇编语言和低级编程中与 int 3 指令关联，当 CPU 遇到 int 3 指令时，它会触发一个异常，这通常被调试器捕获。 通常用于程序报错和调试，打断点的时候会有cc 未初始化的内存也有可能有cc，这个在调试模式下面可以告诉程序员这里出错了。
+          类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new
         </div>
       </a>
 
@@ -339,7 +339,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:29" pubdate>
+            <time datetime="2024-07-31 18:00" pubdate>
               2024-07-31
             </time>
           </div>
@@ -356,15 +356,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
-          无法解析的外部命令问题
+        <a href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+          类继承的问题
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          无法解析的外部命令1、有函数声明了但是没有实现 2、头文件A可能依赖于头文件B中的某个类型或声明。如果包含顺序颠倒，即先包含B后包含A，那么A中使用B中的类型或声明的部分可能在编译时找不到相应的定义，因为B还未被包含。 3、在C++中，如果一个头文件在命名空间外部定义了符号，而另一个头文件在命名空间内部定义了同名符号，那么包含顺序也可能导致链接错误，因为编译器可能无法正确解析这些符号的链接 编译问
+          基类与派生类特性创建派生类对象时，程序首先创建基类对象，也就是说基类对象应当在程序进入派生类构造函数之前被创建。c++使用成员初始化列表来完成。 总结一下有关派生类构造函数的要点：  创建派生类对象前先创建基类对象 派生类构造函数应该通过成员初始化列表将基类信息传递给基类构造函数 派生类构造函数应该初始化新增的数据成员  释放对象的顺序与创建对象的顺序相反，即首先执行派生类的析构函数，然后执行基类
         </div>
       </a>
 
@@ -372,7 +372,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:27" pubdate>
+            <time datetime="2024-07-31 17:59" pubdate>
               2024-07-31
             </time>
           </div>
@@ -389,15 +389,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
-          头文件循环引用和重定义问题
+        <a href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
+          vector中的下标访问[]和at()
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
         <div>
-          防止头文件循环引用比如一个头文件a引用头文件b，头文件b需要引用头文件a，则需要在其中一个头文件中，比如在头文件b中使用a中类的声明，然后在b的cpp文件中使用a的头文件可以解决。 头文件引发的重定义问题重定义产生的情况  情况一：多个源文件包含了同一个头文件时，如果头文件中有某个局部变量或者非内联函数的定义，那么相当于每个源文件都把该局部变量或者非内联函数定义了一次。而它们（局部变量或者非内联函
+          vector中的下标访问[]和at()有何不同下标运算符 [] 不进行边界检查，如果提供的索引超出范围，会导致未定义行为，导致程序崩溃 成员函数 at() 访问元素之前会进行边界检查，如果提供的索引超出范围，会抛出 std::out_of_range 异常。 抛出异常可以使用try&#x2F;catch捕获和处理，try放可能异常的代码，catch捕获然后打印信息 相对于未定义行为，捕获异常更容易
         </div>
       </a>
 
@@ -405,7 +405,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:26" pubdate>
+            <time datetime="2024-07-31 17:57" pubdate>
               2024-07-31
             </time>
           </div>
@@ -422,15 +422,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-          ifndef和pragma once的区别
+        <a href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          reserve和resize的区别
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
         <div>
-          ifndef和pragma once的区别1）#ifndef  #ifndef的方式受C&#x2F;C++语言标准支持。它不仅可以保证同一个文件不会被包含多次，也能保证相同的代码段不会被重复包含（比如定义了相同的类）  当然，缺点就是  如果不同头文件中的宏名（也就是ifndef后面的名字）不小心“撞车”，可能就会导致你看到头文件明明存在，但编译器却硬说找不到声明的状况——这种情况有时非常让人郁闷
+          reserve和resize的区别reserve()函数用于预先分配足够的内存，以容纳指定数量的元素，但不会实际创建或初始化这些元素。它的主要目的是避免在多次添加元素时频繁地重新分配内存，从而提高性能。 12std::vector&lt;int&gt; v;v.reserve(100); // 预分配内存，但不初始化元素   如果n大于当前的vector容量，vector将分配足够的内存，以至少容
         </div>
       </a>
 
@@ -438,7 +438,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:25" pubdate>
+            <time datetime="2024-07-31 17:56" pubdate>
               2024-07-31
             </time>
           </div>
@@ -455,15 +455,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
-          Qt事件处理机制
+        <a href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
+          const在成员函数的前后作用
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
         <div>
-          Qt事件处理机制事件：  来源是系统中的中断，包括与Qt相关的中断（如硬件操作控制产生的中断）和程序中的定时器产生的中断 Qt程序中通过QEvent基类来表示各种类型的事件。  QApplication对象负责监听整个应用程序中所有控件的事件。 Qt事件处理器机制： ​		由exec执行的事件循环在监听整个应用程中所有事件，收到事件通知的控件通过过滤及分发函数，到达事件处理函数。 事件与Qt信号槽
+          const在成员函数的前后作用const在后面，表示这个成员函数不会修改成员变量，即这是一个常量的成员函数，修饰成员函数的属性； const在前面，表示返回的引用不能被修改，不能通过返回的引用来修改成员变量。即返回值是const，修饰的是返回的变量。 注意：常量只能调用常量的成员函数，不能调用非常量的成员函数。而非常量的成员函数可以调用非常量和常量的成员函数。
         </div>
       </a>
 
@@ -471,7 +471,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:23" pubdate>
+            <time datetime="2024-07-31 17:55" pubdate>
               2024-07-31
             </time>
           </div>
@@ -488,15 +488,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
-          Qt中的事件分发过程
+        <a href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          大Vector作为局部变量返回注意事项
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
         <div>
-          Qt中的事件分发过程 当事件产生之后，Qt 使用应用程序对象调用 notify() 函数将事件发送到指定的窗口： 1[override virtual] bool QApplication::notify(QObject *receiver, QEvent *e);  事件在发送过程中可以通过事件过滤器进行过滤，默认不对任何产生的事件进行过滤。 1[virtual] bool QObject::e
+          大Vector作为局部变量返回注意事项1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。 12345std::vector&lt;int&gt; functionWithMoveReturn() &#123;    std::vector&lt;int&gt; myVector = &#123;1, 2, 3, 4, 5&#125;;
         </div>
       </a>
 
@@ -504,7 +504,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:22" pubdate>
+            <time datetime="2024-07-31 17:55" pubdate>
               2024-07-31
             </time>
           </div>
@@ -521,15 +521,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/do-while-false/" target="_self">
-          do ...while(false)
+        <a href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+          在Linux中如何通过一行命令找到文件夹里面的关键字
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/do-while-false/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
         <div>
-          do while(false)的作用：主要是为了能在这个代码块里面随时终止操作，比如do...while(false)块包含了文件的读取、数据的解码、JSON解析等操作，如果在任何一个环节出现问题（如文件打开失败、数据解码失败或JSON解析失败），代码会通过break语句跳出循环（正常是会在代码块里面返回），然后执行后面的清理或者默认操作。第二个作用是避免了在多个地方重复相同的清理代码。
+          在Linux中如何通过一行命令找到文件夹里面的关键字1、find单独使用2 、使用find+ xargs 进行操作3、使用grep查找某目录下包含关键字内容的文件 1、find 单独使用：&#96;&#96;find命令用于在指定目录及其子目录中查找文件。你可以通过-name选项指定要搜索的文件名模式，然后使用-exec&#96; 选项执行相应的操作。 示例： 1234567find /path/
         </div>
       </a>
 
@@ -537,7 +537,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:21" pubdate>
+            <time datetime="2024-07-31 17:53" pubdate>
               2024-07-31
             </time>
           </div>
@@ -552,7 +552,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

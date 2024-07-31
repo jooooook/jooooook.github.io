@@ -16,21 +16,21 @@
   <meta name="author" content="Chen Jin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装">
+    <meta name="description" content="大Vector作为局部变量返回注意事项1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。 12345std::vector&lt;int&gt; functionWithMoveReturn() &#123;    std::vector&lt;int&gt; myVector &#x3D; &#123;1, 2, 3, 4, 5&#125;;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="http-parser库的使用">
-<meta property="og:url" content="https://jooooook.github.io/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="大Vector作为局部变量返回注意事项">
+<meta property="og:url" content="https://jooooook.github.io/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
 <meta property="og:site_name" content="Jin&#39;s study notes">
-<meta property="og:description" content="http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装">
+<meta property="og:description" content="大Vector作为局部变量返回注意事项1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。 12345std::vector&lt;int&gt; functionWithMoveReturn() &#123;    std::vector&lt;int&gt; myVector &#x3D; &#123;1, 2, 3, 4, 5&#125;;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-31T09:34:40.254Z">
-<meta property="article:modified_time" content="2024-07-31T09:37:43.650Z">
+<meta property="article:published_time" content="2024-07-31T09:55:18.000Z">
+<meta property="article:modified_time" content="2024-07-31T09:55:34.413Z">
 <meta property="article:author" content="Chen Jin">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>http-parser库的使用 - Jin&#39;s study notes</title>
+  <title>大Vector作为局部变量返回注意事项 - Jin&#39;s study notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="http-parser库的使用"></span>
+            <span id="subtitle" data-typed-text="大Vector作为局部变量返回注意事项"></span>
           
         </div>
 
@@ -207,7 +207,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-31 17:34" pubdate>
+        <time datetime="2024-07-31 17:55" pubdate>
           2024年7月31日 下午
         </time>
       </span>
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          107 字
+          245 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -280,13 +280,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">http-parser库的使用</h1>
+            <h1 id="seo-header">大Vector作为局部变量返回注意事项</h1>
             
             
               <div class="markdown-body">
                 
-                <p>http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。</p>
-<p>为了使用方便，需要进行封装</p>
+                <h1 id="大Vector作为局部变量返回注意事项"><a href="#大Vector作为局部变量返回注意事项" class="headerlink" title="大Vector作为局部变量返回注意事项"></a>大Vector作为局部变量返回注意事项</h1><p>1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">functionWithMoveReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; myVector = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br>    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">move</span>(myVector);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>2、防止栈溢出，可以把他分配在堆上，然后返回引用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; <span class="hljs-title">functionWithRefReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt;* myVector = <span class="hljs-keyword">new</span> std::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;);<br>    <span class="hljs-keyword">return</span> *myVector;<br>&#125;<br><br><span class="hljs-comment">// 在使用完引用后手动释放内存</span><br>std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; returnedVector = <span class="hljs-built_in">functionWithRefReturn</span>();<br><span class="hljs-comment">// 使用returnedVector...</span><br><span class="hljs-keyword">delete</span> &amp;returnedVector;<br><br></code></pre></td></tr></table></figure>
+
+<p>3、把它变为全局或静态变量，这样不会保存在栈上，但是，使用全局变量或静态成员变量需要谨慎使用，因为它们可能会引入全局状态和潜在的并发访问问题。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::vector&lt;<span class="hljs-type">int</span>&gt; myVector = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br><br><span class="hljs-function">std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; <span class="hljs-title">functionWithRefReturn</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> myVector;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -304,8 +311,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>http-parser库的使用</div>
-      <div>https://jooooook.github.io/2024/07/31/http-parser库的使用/</div>
+      <div>大Vector作为局部变量返回注意事项</div>
+      <div>https://jooooook.github.io/2024/07/31/大Vector作为局部变量返回注意事项/</div>
     </div>
     <div class="license-meta">
       
@@ -349,9 +356,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="单例模式的设计">
+                      <a href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" title="const在成员函数的前后作用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单例模式的设计</span>
+                        <span class="hidden-mobile">const在成员函数的前后作用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -359,8 +366,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" title="连不上云服务器mysql">
-                        <span class="hidden-mobile">连不上云服务器mysql</span>
+                      <a href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" title="在Linux中如何通过一行命令找到文件夹里面的关键字">
+                        <span class="hidden-mobile">在Linux中如何通过一行命令找到文件夹里面的关键字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,21 +16,21 @@
   <meta name="author" content="Chen Jin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装">
+    <meta name="description" content="类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new">
 <meta property="og:type" content="article">
-<meta property="og:title" content="http-parser库的使用">
-<meta property="og:url" content="https://jooooook.github.io/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="类中动态内存相关问题">
+<meta property="og:url" content="https://jooooook.github.io/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Jin&#39;s study notes">
-<meta property="og:description" content="http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装">
+<meta property="og:description" content="类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-31T09:34:40.254Z">
-<meta property="article:modified_time" content="2024-07-31T09:37:43.650Z">
+<meta property="article:published_time" content="2024-07-31T10:00:22.000Z">
+<meta property="article:modified_time" content="2024-07-31T10:00:38.410Z">
 <meta property="article:author" content="Chen Jin">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>http-parser库的使用 - Jin&#39;s study notes</title>
+  <title>类中动态内存相关问题 - Jin&#39;s study notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="http-parser库的使用"></span>
+            <span id="subtitle" data-typed-text="类中动态内存相关问题"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-31 17:34" pubdate>
-          2024年7月31日 下午
+        <time datetime="2024-07-31 18:00" pubdate>
+          2024年7月31日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          107 字
+          485 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -280,13 +280,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">http-parser库的使用</h1>
+            <h1 id="seo-header">类中动态内存相关问题</h1>
             
             
               <div class="markdown-body">
                 
-                <p>http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。</p>
-<p>为了使用方便，需要进行封装</p>
+                <h1 id="类中动态内存相关问题"><a href="#类中动态内存相关问题" class="headerlink" title="类中动态内存相关问题"></a>类中动态内存相关问题</h1><p>不能在类声明中初始化静态成员变量，因为类声明只是描述了<strong>如何分配内存，但是不实际分配内存</strong>。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。</p>
+<p>+++</p>
+<p>问：为什么要有析构函数？</p>
+<p>答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new所分配的内存。</p>
+<p><strong>类创建中一些特殊的成员函数</strong></p>
+<p>很多类中产生的问题都是由于特殊成员函数引起的，C++自动提供了下面这些成员函数：</p>
+<ol>
+<li>默认构造函数，如果没有定义构造函数</li>
+<li>默认析构函数，如果没有定义</li>
+<li>拷贝构造函数，如果没有定义</li>
+<li>赋值运算符，如果没有定义</li>
+<li>地址运算符，如果没有定义</li>
+</ol>
+<p>其中默认的拷贝构造函数和赋值运算符都是<strong>浅拷贝</strong>，如果类中有用new创建的动态变量，使用默认的会出现两次释放同一指针的问题，指针悬挂，程序乱码等，需要自己实现<strong>深拷贝的拷贝构造函数和赋值运算符</strong></p>
+<p><strong>当在类中使用new时，应该注意一下几点：</strong></p>
+<ol>
+<li>如果在构造函数中用new初始化指针成员，那么在析构函数中应该使用delete</li>
+<li>new和delete必须成对出现</li>
+<li>应该定义一个复制构造函数，通过深拷贝将一个对象初始化为另一个对象</li>
+<li>重载一个赋值运算符，通过深拷贝将一个对象复制给另一个对象。</li>
+</ol>
 
                 
               </div>
@@ -304,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>http-parser库的使用</div>
-      <div>https://jooooook.github.io/2024/07/31/http-parser库的使用/</div>
+      <div>类中动态内存相关问题</div>
+      <div>https://jooooook.github.io/2024/07/31/类中动态内存相关问题/</div>
     </div>
     <div class="license-meta">
       
@@ -349,9 +368,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="单例模式的设计">
+                      <a href="/2024/07/31/static%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%BE%E5%88%B0static%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E7%90%86/" title="static成员函数在调用时找到static成员变量的原理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单例模式的设计</span>
+                        <span class="hidden-mobile">static成员函数在调用时找到static成员变量的原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -359,8 +378,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" title="连不上云服务器mysql">
-                        <span class="hidden-mobile">连不上云服务器mysql</span>
+                      <a href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" title="类继承的问题">
+                        <span class="hidden-mobile">类继承的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
