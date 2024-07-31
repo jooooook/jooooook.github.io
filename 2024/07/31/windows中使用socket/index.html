@@ -16,19 +16,21 @@
   <meta name="author" content="Chen Jin">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="基于I&#x2F;O 完成端口的多线程安全队列">
-<meta property="og:url" content="https://jooooook.github.io/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/index.html">
+    <meta name="description" content="windows中使用socket前需要使用WSAStratup函数WSAStartup()函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。 12345WSAData wsa;&#x2F;&#x2F;Winsock版本2.2&#x2F;&#x2F;1.1早期版本，功能不足，现在一般使用2.2WSAStartup(MAKEWORD(2, 2), &amp;wsa);  WSACleanu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows中使用socket">
+<meta property="og:url" content="https://jooooook.github.io/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/index.html">
 <meta property="og:site_name" content="Jin&#39;s study notes">
+<meta property="og:description" content="windows中使用socket前需要使用WSAStratup函数WSAStartup()函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。 12345WSAData wsa;&#x2F;&#x2F;Winsock版本2.2&#x2F;&#x2F;1.1早期版本，功能不足，现在一般使用2.2WSAStartup(MAKEWORD(2, 2), &amp;wsa);  WSACleanu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-25T17:06:40.000Z">
-<meta property="article:modified_time" content="2024-07-30T14:59:36.933Z">
+<meta property="article:published_time" content="2024-07-31T09:30:37.684Z">
+<meta property="article:modified_time" content="2024-07-31T09:31:02.833Z">
 <meta property="article:author" content="Chen Jin">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>基于I/O 完成端口的多线程安全队列 - Jin&#39;s study notes</title>
+  <title>windows中使用socket - Jin&#39;s study notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基于I/O 完成端口的多线程安全队列"></span>
+            <span id="subtitle" data-typed-text="windows中使用socket"></span>
           
         </div>
 
@@ -205,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-26 01:06" pubdate>
-          2024年7月26日 凌晨
+        <time datetime="2024-07-31 17:30" pubdate>
+          2024年7月31日 下午
         </time>
       </span>
     
@@ -217,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          185 字
         
       </span>
     
@@ -228,7 +230,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -278,12 +280,17 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">基于I/O 完成端口的多线程安全队列</h1>
+            <h1 id="seo-header">windows中使用socket</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="windows中使用socket前需要使用WSAStratup函数"><a href="#windows中使用socket前需要使用WSAStratup函数" class="headerlink" title="windows中使用socket前需要使用WSAStratup函数"></a>windows中使用socket前需要使用WSAStratup函数</h1><p><code>WSAStartup()</code>函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss">WSAData wsa;<br><span class="hljs-comment">//Winsock版本2.2</span><br><span class="hljs-comment">//1.1早期版本，功能不足，现在一般使用2.2</span><br><span class="hljs-built_in">WSAStartup</span>(MAKEWORD(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>), &amp;wsa);  <br><span class="hljs-built_in">WSACleanup</span>();<br></code></pre></td></tr></table></figure>
+
+<p><code>WSAStartup()</code>和<code>WSACleanup()</code>函数之间存在一种计数机制。每次调用<code>WSAStartup()</code>，都会增加一个计数器；而每次调用<code>WSACleanup()</code>，则会减少这个计数器。只有当计数器归零时，所有资源才会被释放，Winsock DLL才可能被卸载。这样设计是为了防止在应用程序的不同部分分别调用初始化和清理函数时可能出现的资源泄漏问题。</p>
+<p><code>WSAStartup()</code>确保了Winsock DLL的线程安全特性。</p>
+
                 
               </div>
             
@@ -300,8 +307,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基于I/O 完成端口的多线程安全队列</div>
-      <div>https://jooooook.github.io/2024/07/26/基于I-O-完成端口的多线程安全队列/</div>
+      <div>windows中使用socket</div>
+      <div>https://jooooook.github.io/2024/07/31/windows中使用socket/</div>
     </div>
     <div class="license-meta">
       
@@ -313,7 +320,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月26日</div>
+          <div>2024年7月31日</div>
         </div>
       
       
@@ -345,9 +352,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/31/Unix-Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84-fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" title="Unix/Linux系统中的`fork()`系统调用">
+                      <a href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" title="连不上云服务器mysql">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Unix/Linux系统中的`fork()`系统调用</span>
+                        <span class="hidden-mobile">连不上云服务器mysql</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -355,8 +362,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/26/IOCP%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" title="IOCP异步编程">
-                        <span class="hidden-mobile">IOCP异步编程</span>
+                      <a href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" title="内存中的“cc”">
+                        <span class="hidden-mobile">内存中的“cc”</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,19 +16,21 @@
   <meta name="author" content="Chen Jin">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="基于I&#x2F;O 完成端口的多线程安全队列">
-<meta property="og:url" content="https://jooooook.github.io/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/index.html">
+    <meta name="description" content="使用Unix&#x2F;Linux系统中的fork()系统调用时，需要注意的线程与进程之间的关系和潜在问题  线程无法被复制：fork()发生时，只有调用fork()的那个线程会被复制到子进程中，其他的线程不会被复制过去。 破坏多线程模式：如果父进程中某个线程负责资源的初始化或清理，而在子进程中这个线程不存在，那么可能会导致资源未被正确管理，进而引发错误。 先准备好进程结构，再去使用线程：涉及fo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix&#x2F;Linux系统中的&#96;fork()&#96;系统调用">
+<meta property="og:url" content="https://jooooook.github.io/2024/07/31/Unix-Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84-fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/index.html">
 <meta property="og:site_name" content="Jin&#39;s study notes">
+<meta property="og:description" content="使用Unix&#x2F;Linux系统中的fork()系统调用时，需要注意的线程与进程之间的关系和潜在问题  线程无法被复制：fork()发生时，只有调用fork()的那个线程会被复制到子进程中，其他的线程不会被复制过去。 破坏多线程模式：如果父进程中某个线程负责资源的初始化或清理，而在子进程中这个线程不存在，那么可能会导致资源未被正确管理，进而引发错误。 先准备好进程结构，再去使用线程：涉及fo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-25T17:06:40.000Z">
-<meta property="article:modified_time" content="2024-07-30T14:59:36.933Z">
+<meta property="article:published_time" content="2024-07-31T07:35:14.410Z">
+<meta property="article:modified_time" content="2024-07-31T07:39:02.135Z">
 <meta property="article:author" content="Chen Jin">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>基于I/O 完成端口的多线程安全队列 - Jin&#39;s study notes</title>
+  <title>Unix/Linux系统中的`fork()`系统调用 - Jin&#39;s study notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基于I/O 完成端口的多线程安全队列"></span>
+            <span id="subtitle" data-typed-text="Unix/Linux系统中的`fork()`系统调用"></span>
           
         </div>
 
@@ -205,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-26 01:06" pubdate>
-          2024年7月26日 凌晨
+        <time datetime="2024-07-31 15:35" pubdate>
+          2024年7月31日 下午
         </time>
       </span>
     
@@ -217,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          199 字
         
       </span>
     
@@ -228,7 +230,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -278,12 +280,18 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">基于I/O 完成端口的多线程安全队列</h1>
+            <h1 id="seo-header">Unix/Linux系统中的`fork()`系统调用</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <p>使用Unix&#x2F;Linux系统中的<code>fork()</code>系统调用时，需要注意的线程与进程之间的关系和潜在问题</p>
+<ol>
+<li><strong>线程无法被复制</strong>：<code>fork()</code>发生时，只有调用<code>fork()</code>的那个线程会被复制到子进程中，其他的线程不会被复制过去。</li>
+<li><strong>破坏多线程模式</strong>：如果父进程中某个线程负责资源的初始化或清理，而在子进程中这个线程不存在，那么可能会导致资源未被正确管理，进而引发错误。</li>
+<li><strong>先准备好进程结构，再去使用线程</strong>：涉及<code>fork()</code>和多线程的程序时，应该先明确进程的创建和初始化过程，确保在创建新的线程之前，进程的结构已经稳定。</li>
+</ol>
+
                 
               </div>
             
@@ -300,8 +308,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基于I/O 完成端口的多线程安全队列</div>
-      <div>https://jooooook.github.io/2024/07/26/基于I-O-完成端口的多线程安全队列/</div>
+      <div>Unix/Linux系统中的`fork()`系统调用</div>
+      <div>https://jooooook.github.io/2024/07/31/Unix-Linux系统中的-fork-系统调用/</div>
     </div>
     <div class="license-meta">
       
@@ -313,7 +321,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月26日</div>
+          <div>2024年7月31日</div>
         </div>
       
       
@@ -345,9 +353,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/31/Unix-Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84-fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" title="Unix/Linux系统中的`fork()`系统调用">
+                      <a href="/2024/07/31/%E6%9C%AC%E5%9C%B0%E5%A5%97%E6%8E%A5%E5%AD%97%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E7%94%A8%E6%B3%95/" title="本地套接字与网络套接字的区别和用法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Unix/Linux系统中的`fork()`系统调用</span>
+                        <span class="hidden-mobile">本地套接字与网络套接字的区别和用法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -355,8 +363,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/26/IOCP%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" title="IOCP异步编程">
-                        <span class="hidden-mobile">IOCP异步编程</span>
+                      <a href="/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/" title="基于I/O 完成端口的多线程安全队列">
+                        <span class="hidden-mobile">基于I/O 完成端口的多线程安全队列</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

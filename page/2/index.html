@@ -18,7 +18,7 @@
   
     <meta property="og:type" content="website">
 <meta property="og:title" content="Jin&#39;s study notes">
-<meta property="og:url" content="https://jooooook.github.io/index.html">
+<meta property="og:url" content="https://jooooook.github.io/page/2/index.html">
 <meta property="og:site_name" content="Jin&#39;s study notes">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Chen Jin">
@@ -224,15 +224,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
-          http-parser库的使用
+        <a href="/2024/07/31/%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%96%87%E4%BB%B6%E5%A5%97%E6%8E%A5%E5%AD%97/" target="_self">
+          进程间传递文件套接字
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/http-parser%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%96%87%E4%BB%B6%E5%A5%97%E6%8E%A5%E5%AD%97/" target="_self">
         <div>
-          http-parser库是C语言实现的，比较简单，仅仅支持HTTP&#x2F;1.0和HTTP&#x2F;1.1，支持边接收边解析，解析过程中可随时中断和恢复，比较轻量，每个连接仅需少量内存，既可以作为独立库集成到现有项目中，也可以作为构建自定义HTTP服务器的基础组件。 为了使用方便，需要进行封装
+          
         </div>
       </a>
 
@@ -240,7 +240,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:34" pubdate>
+            <time datetime="2024-07-31 17:20" pubdate>
               2024-07-31
             </time>
           </div>
@@ -257,15 +257,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" target="_self">
-          连不上云服务器mysql
+        <a href="/2024/07/31/unlink%E5%92%8Cclose/" target="_self">
+          unlink和close
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8mysql/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/unlink%E5%92%8Cclose/" target="_self">
         <div>
-          连不上云服务器mysql原因：mysql只监听了本地回环地址，bind-address &#x3D; 127.0.0.1，可以使用netstat -tulnp | grep mysql命令查看是否是127.0.0.1， 解决步骤：  打开MySQL配置文件。MySQL的配置文件通常位于/etc/mysql/my.cnf或者/etc/mysql/mysql.conf.d/mysqld.cnf 123
+          unlink函数在这段代码中的作用是删除一个文件系统中的文件或者取消一个已命名的管道、套接字等。 unlink操作成功后，如果还有其他进程已经打开了这个文件或套接字，它们仍然可以继续使用，直到它们也关闭了该文件描述符。 函数close是用来断开文件描述符和已打开文件之间的连接，并释放此文件描述符，以供其他文件使用。如果程序通过exit函数退出或者从主程序中返回，所有打开的文件将被关闭。 1int
         </div>
       </a>
 
@@ -273,7 +273,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:32" pubdate>
+            <time datetime="2024-07-31 17:19" pubdate>
               2024-07-31
             </time>
           </div>
@@ -290,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
-          windows中使用socket
+        <a href="/2024/07/31/%E6%9C%AC%E5%9C%B0%E5%A5%97%E6%8E%A5%E5%AD%97%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E7%94%A8%E6%B3%95/" target="_self">
+          本地套接字与网络套接字的区别和用法
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E6%9C%AC%E5%9C%B0%E5%A5%97%E6%8E%A5%E5%AD%97%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E7%94%A8%E6%B3%95/" target="_self">
         <div>
-          windows中使用socket前需要使用WSAStratup函数WSAStartup()函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。 12345WSAData wsa;//Winsock版本2.2//1.1早期版本，功能不足，现在一般使用2.2WSAStartup(MAKEWORD(2, 2), &amp;wsa);  WSACleanu
+          网络套接字是通过绑定ip和端口使网络中的进程之间进行通信，而本地套接字****是绑定套接字文件的路径名来使单机中的进程间通信,是一种IPC机制,其存储地址结构的数据类型为struct sockaddr_un,该数据类型包含在#include&lt;sys/un.h&gt;头文件中 1234struct sockaddr_un &#123;		sa_family_t sun_family; /*P
         </div>
       </a>
 
@@ -306,7 +306,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:30" pubdate>
+            <time datetime="2024-07-31 15:39" pubdate>
               2024-07-31
             </time>
           </div>
@@ -323,15 +323,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
-          内存中的“cc”
+        <a href="/2024/07/31/Unix-Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84-fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" target="_self">
+          Unix/Linux系统中的`fork()`系统调用
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Unix-Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84-fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" target="_self">
         <div>
-          内存中的“cc”代表的是十六进制数 0xCC，在汇编语言和低级编程中与 int 3 指令关联，当 CPU 遇到 int 3 指令时，它会触发一个异常，这通常被调试器捕获。 通常用于程序报错和调试，打断点的时候会有cc 未初始化的内存也有可能有cc，这个在调试模式下面可以告诉程序员这里出错了。
+          使用Unix&#x2F;Linux系统中的fork()系统调用时，需要注意的线程与进程之间的关系和潜在问题  线程无法被复制：fork()发生时，只有调用fork()的那个线程会被复制到子进程中，其他的线程不会被复制过去。 破坏多线程模式：如果父进程中某个线程负责资源的初始化或清理，而在子进程中这个线程不存在，那么可能会导致资源未被正确管理，进而引发错误。 先准备好进程结构，再去使用线程：涉及fo
         </div>
       </a>
 
@@ -339,7 +339,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:29" pubdate>
+            <time datetime="2024-07-31 15:35" pubdate>
               2024-07-31
             </time>
           </div>
@@ -356,15 +356,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
-          无法解析的外部命令问题
+        <a href="/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/" target="_self">
+          基于I/O 完成端口的多线程安全队列
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/" target="_self">
         <div>
-          无法解析的外部命令1、有函数声明了但是没有实现 2、头文件A可能依赖于头文件B中的某个类型或声明。如果包含顺序颠倒，即先包含B后包含A，那么A中使用B中的类型或声明的部分可能在编译时找不到相应的定义，因为B还未被包含。 3、在C++中，如果一个头文件在命名空间外部定义了符号，而另一个头文件在命名空间内部定义了同名符号，那么包含顺序也可能导致链接错误，因为编译器可能无法正确解析这些符号的链接 编译问
+          
         </div>
       </a>
 
@@ -372,8 +372,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:27" pubdate>
-              2024-07-31
+            <time datetime="2024-07-26 01:06" pubdate>
+              2024-07-26
             </time>
           </div>
         
@@ -389,15 +389,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
-          头文件循环引用和重定义问题
+        <a href="/2024/07/26/IOCP%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" target="_self">
+          IOCP异步编程
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/26/IOCP%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" target="_self">
         <div>
-          防止头文件循环引用比如一个头文件a引用头文件b，头文件b需要引用头文件a，则需要在其中一个头文件中，比如在头文件b中使用a中类的声明，然后在b的cpp文件中使用a的头文件可以解决。 头文件引发的重定义问题重定义产生的情况  情况一：多个源文件包含了同一个头文件时，如果头文件中有某个局部变量或者非内联函数的定义，那么相当于每个源文件都把该局部变量或者非内联函数定义了一次。而它们（局部变量或者非内联函
+          iocp异步编程流程 创建I&#x2F;O完成端口: 使用CreateIoCompletionPort函数创建一个I&#x2F;O完成端口。这个端口将作为异步操作完成时的通知中心，需要与套接字关联。  HANDLE CreateIoCompletionPort(  HANDLE FileHandle,  HANDLE ExistingCompletionPort,  ULONG_PTR Compl
         </div>
       </a>
 
@@ -405,8 +405,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:26" pubdate>
-              2024-07-31
+            <time datetime="2024-07-26 01:06" pubdate>
+              2024-07-26
             </time>
           </div>
         
@@ -422,15 +422,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-          ifndef和pragma once的区别
+        <a href="/2024/07/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%B1%BB%E8%AE%BE%E8%AE%A1/" target="_self">
+          线程池类设计
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%B1%BB%E8%AE%BE%E8%AE%A1/" target="_self">
         <div>
-          ifndef和pragma once的区别1）#ifndef  #ifndef的方式受C&#x2F;C++语言标准支持。它不仅可以保证同一个文件不会被包含多次，也能保证相同的代码段不会被重复包含（比如定义了相同的类）  当然，缺点就是  如果不同头文件中的宏名（也就是ifndef后面的名字）不小心“撞车”，可能就会导致你看到头文件明明存在，但编译器却硬说找不到声明的状况——这种情况有时非常让人郁闷
+          设计思路1 首先要先封装线程类。线程的创建、销毁、设置、启动、停止和主线程函数都要设置好接口。 2 然后设计线程池类。需要设计好接口：初始化、大小调整、添加任务、关闭、获取尺寸、启动等。线程池有一个任务列表属性，一个事件属性和一个互斥锁。外部投递进来的任务先是加入任务列表属性。然后设置事件属性。每个子线程都会等待事件。一旦事件被设置，则获取到该事件的线程就会通过互斥锁来同步任务列表，取其中一个任务
         </div>
       </a>
 
@@ -438,8 +438,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:25" pubdate>
-              2024-07-31
+            <time datetime="2024-07-25 23:13" pubdate>
+              2024-07-25
             </time>
           </div>
         
@@ -455,15 +455,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
-          Qt事件处理机制
+        <a href="/2024/07/21/va-list%E7%9A%84%E7%94%A8%E6%B3%95/" target="_self">
+          va_list的用法
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/21/va-list%E7%9A%84%E7%94%A8%E6%B3%95/" target="_self">
         <div>
-          Qt事件处理机制事件：  来源是系统中的中断，包括与Qt相关的中断（如硬件操作控制产生的中断）和程序中的定时器产生的中断 Qt程序中通过QEvent基类来表示各种类型的事件。  QApplication对象负责监听整个应用程序中所有控件的事件。 Qt事件处理器机制： ​		由exec执行的事件循环在监听整个应用程中所有事件，收到事件通知的控件通过过滤及分发函数，到达事件处理函数。 事件与Qt信号槽
+          VA_LIST的用法： 首先在函数里定义一具VA_LIST型的变量，这个变量是指向参数的指针；  1va_list args;  然后用VA_START宏初始化变量刚定义的VA_LIST变量；  使用va_start宏初始化va_list变量。va_start需要两个参数：va_list变量和最后一个固定参数（在…之前的参数）的地址。 12345void my_printf(const char
         </div>
       </a>
 
@@ -471,78 +471,19 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:23" pubdate>
-              2024-07-31
+            <time datetime="2024-07-21 01:52" pubdate>
+              2024-07-21
             </time>
           </div>
         
         
         
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
-          Qt中的事件分发过程
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
-        <div>
-          Qt中的事件分发过程 当事件产生之后，Qt 使用应用程序对象调用 notify() 函数将事件发送到指定的窗口： 1[override virtual] bool QApplication::notify(QObject *receiver, QEvent *e);  事件在发送过程中可以通过事件过滤器进行过滤，默认不对任何产生的事件进行过滤。 1[virtual] bool QObject::e
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:22" pubdate>
-              2024-07-31
-            </time>
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AF%AD%E8%A8%80%E6%8A%80%E5%B7%A7/">#语言技巧</a>
+            
           </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/do-while-false/" target="_self">
-          do ...while(false)
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/do-while-false/" target="_self">
-        <div>
-          do while(false)的作用：主要是为了能在这个代码块里面随时终止操作，比如do...while(false)块包含了文件的读取、数据的解码、JSON解析等操作，如果在任何一个环节出现问题（如文件打开失败、数据解码失败或JSON解析失败），代码会通过break语句跳出循环（正常是会在代码块里面返回），然后执行后面的清理或者默认操作。第二个作用是避免了在多个地方重复相同的清理代码。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:21" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
         
       </div>
     </article>
@@ -552,7 +493,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </span>
   </nav>
 
