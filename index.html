@@ -224,6 +224,237 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/07/31/%E9%87%8E%E6%8C%87%E9%92%88%E5%92%8C%E6%82%AC%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E9%81%BF%E5%85%8D/" target="_self">
+          野指针和悬空指针的产生和避免
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E9%87%8E%E6%8C%87%E9%92%88%E5%92%8C%E6%82%AC%E7%A9%BA%E6%8C%87%E9%92%88%E7%9A%84%E4%BA%A7%E7%94%9F%E5%92%8C%E9%81%BF%E5%85%8D/" target="_self">
+        <div>
+          野指针和悬空指针的产生和避免产生原因：  指针没有初始化； （野指针） 指针变量所指向的动态内存被释放后未设为 NULL； （悬空指针） 指针操作超越了变量的作用范围；比如返回了一个函数中局部变量的指针  （悬空指针）  避免野指针和悬空指针的出现，应当：  确保所有指针在使用前已经初始化。 避免返回指向局部变量的指针。 在释放动态分配的内存后，立即将指针设置为 NULL。  野指针和悬空指针检测
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:19" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
+          值传递和引用传递
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
+        <div>
+          值传递和引用传递1、值传递 ​	值传递的本质是把实参的一个副本传递给形参，函数对形参的修改不会影响实参的值。值传递一般适用于传递基本数据类型（int，float等）和较小的对象，当不希望函数内部的操作影响到原始数据的时候也可以用。当对象太大，复制的成本较高就不适用值传递。 2、引用传递 ​	引用传递的本质是传递实参的引用给形参，所以在函数内部对形参的修改会同步到实参上。引用传递适用与传递较大的对象
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:18" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          深拷贝和浅拷贝的区别
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+        <div>
+          深拷贝和浅拷贝的区别​	浅拷贝就是复制对象的时候仅仅复制对象本身以及成员变量的值，不会复制成员变量所指向的内容。如果对象里面含有指针成员，浅拷贝会复制指针本身，不会复制指针指向的内容。 ​	它的特点就是比较快，缺点是可能会导致数据不一致或者指针悬挂，而且在多线程的情况下是不安全的。（线程安全是指在多线程的环境中，运行代码不会导致数据竞争或者其他不确定性的结果）  ​	因为浅拷贝只会拷贝指针本身，所
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:16" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/C-11%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">
+          C++11新特性
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/C-11%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">
+        <div>
+          C++11新特性C++11的新特性有哪些1、语法的改进（1）统⼀的初始化⽅法 ，{}（2）成员变量默认初始化（3）auto关键字： 允许编译器⾃动推断变量的类型，减少类型声明的冗余。（4）decltype  求表达式的类型（5）智能指针 std::shared_ptr 和 std::unique_ptr（6）空指针 nullptr: 把传统的NULL跟(void*) 0区分开来（7）基于范围的fo
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:14" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" target="_self">
+          内存对齐
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" target="_self">
+        <div>
+          内存对齐从理论上来讲，任何类型的变量可以从任意地址开始存放。但是实际上计算机对基本数据类型在内存中的存放位置有限制，会要求数据首地址的值是某个数（通常是4或8）的整数倍，这就是内存对齐。 内存对齐是一种优化技术，其主要目的是提高内存访问速度。 对其规则有：  基本类型的对齐值就是sizeof值。如果该成员是c++自带类型如int、char、double等，那么其对齐字节数&#x3D;该类型在内存中
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:13" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/const-cast/" target="_self">
+          C++强制类型转换
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/const-cast/" target="_self">
+        <div>
+          C++强制类型转换有哪些方法有四个关键字：static_cast、dynamic_cast、reinterpret_cast 和 const_cast static_cast​	主要用于基本类型之间的转换，比如把int转换成char，或者把其他类型的表达式转换成void类型。它是编译时的类型转换，没有运行时类型检查，所以在上行转换的时候是安全的，下行转换不安全； dynamic_cast​	在下行
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:10" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%8C%87%E9%92%88%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/" target="_self">
+          迭代器和指针有啥不同
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%8C%87%E9%92%88%E6%9C%89%E5%95%A5%E4%B8%8D%E5%90%8C/" target="_self">
+        <div>
+          迭代器和指针的区别迭代器：   （1）迭代器不是指针，是类模板，表现的像指针。他只是模拟了指针的一些功能，通过重载了指针的一些操作符，-&gt;,,++ –等封装了指针，是一个“可遍历STL（ Standard Template Library）容器内全部或部分元素”的对象， 本质是封装了原生指针，是指针概念的一种提升（lift），提供了比指针更高级的行为，相当于一种智能指针，他可以根据不同类型的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:08" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/07/31/C-%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%86%85%E8%B5%8B%E5%80%BC%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
           C++类中使用成员初始化列表和构造函数内赋值的区别
         </a>
@@ -317,242 +548,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
-          类中动态内存相关问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 18:00" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
-          类继承的问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          基类与派生类特性创建派生类对象时，程序首先创建基类对象，也就是说基类对象应当在程序进入派生类构造函数之前被创建。c++使用成员初始化列表来完成。 总结一下有关派生类构造函数的要点：  创建派生类对象前先创建基类对象 派生类构造函数应该通过成员初始化列表将基类信息传递给基类构造函数 派生类构造函数应该初始化新增的数据成员  释放对象的顺序与创建对象的顺序相反，即首先执行派生类的析构函数，然后执行基类
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:59" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
-          vector中的下标访问[]和at()
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
-        <div>
-          vector中的下标访问[]和at()有何不同下标运算符 [] 不进行边界检查，如果提供的索引超出范围，会导致未定义行为，导致程序崩溃 成员函数 at() 访问元素之前会进行边界检查，如果提供的索引超出范围，会抛出 std::out_of_range 异常。 抛出异常可以使用try&#x2F;catch捕获和处理，try放可能异常的代码，catch捕获然后打印信息 相对于未定义行为，捕获异常更容易
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:57" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-          reserve和resize的区别
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-        <div>
-          reserve和resize的区别reserve()函数用于预先分配足够的内存，以容纳指定数量的元素，但不会实际创建或初始化这些元素。它的主要目的是避免在多次添加元素时频繁地重新分配内存，从而提高性能。 12std::vector&lt;int&gt; v;v.reserve(100); // 预分配内存，但不初始化元素   如果n大于当前的vector容量，vector将分配足够的内存，以至少容
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:56" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
-          const在成员函数的前后作用
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
-        <div>
-          const在成员函数的前后作用const在后面，表示这个成员函数不会修改成员变量，即这是一个常量的成员函数，修饰成员函数的属性； const在前面，表示返回的引用不能被修改，不能通过返回的引用来修改成员变量。即返回值是const，修饰的是返回的变量。 注意：常量只能调用常量的成员函数，不能调用非常量的成员函数。而非常量的成员函数可以调用非常量和常量的成员函数。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:55" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-          大Vector作为局部变量返回注意事项
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
-        <div>
-          大Vector作为局部变量返回注意事项1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。 12345std::vector&lt;int&gt; functionWithMoveReturn() &#123;    std::vector&lt;int&gt; myVector = &#123;1, 2, 3, 4, 5&#125;;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:55" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
-          在Linux中如何通过一行命令找到文件夹里面的关键字
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
-        <div>
-          在Linux中如何通过一行命令找到文件夹里面的关键字1、find单独使用2 、使用find+ xargs 进行操作3、使用grep查找某目录下包含关键字内容的文件 1、find 单独使用：&#96;&#96;find命令用于在指定目录及其子目录中查找文件。你可以通过-name选项指定要搜索的文件名模式，然后使用-exec&#96; 选项执行相应的操作。 示例： 1234567find /path/
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:53" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

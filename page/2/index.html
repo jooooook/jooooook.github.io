@@ -224,6 +224,237 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
+          类中动态内存相关问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E4%B8%AD%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 18:00" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+          类继承的问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          基类与派生类特性创建派生类对象时，程序首先创建基类对象，也就是说基类对象应当在程序进入派生类构造函数之前被创建。c++使用成员初始化列表来完成。 总结一下有关派生类构造函数的要点：  创建派生类对象前先创建基类对象 派生类构造函数应该通过成员初始化列表将基类信息传递给基类构造函数 派生类构造函数应该初始化新增的数据成员  释放对象的顺序与创建对象的顺序相反，即首先执行派生类的析构函数，然后执行基类
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:59" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
+          vector中的下标访问[]和at()
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/vector%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87%E8%AE%BF%E9%97%AE-%E5%92%8Cat/" target="_self">
+        <div>
+          vector中的下标访问[]和at()有何不同下标运算符 [] 不进行边界检查，如果提供的索引超出范围，会导致未定义行为，导致程序崩溃 成员函数 at() 访问元素之前会进行边界检查，如果提供的索引超出范围，会抛出 std::out_of_range 异常。 抛出异常可以使用try&#x2F;catch捕获和处理，try放可能异常的代码，catch捕获然后打印信息 相对于未定义行为，捕获异常更容易
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:57" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          reserve和resize的区别
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/reserve%E5%92%8Cresize%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+        <div>
+          reserve和resize的区别reserve()函数用于预先分配足够的内存，以容纳指定数量的元素，但不会实际创建或初始化这些元素。它的主要目的是避免在多次添加元素时频繁地重新分配内存，从而提高性能。 12std::vector&lt;int&gt; v;v.reserve(100); // 预分配内存，但不初始化元素   如果n大于当前的vector容量，vector将分配足够的内存，以至少容
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:56" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
+          const在成员函数的前后作用
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/const%E5%9C%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%89%8D%E5%90%8E%E4%BD%9C%E7%94%A8/" target="_self">
+        <div>
+          const在成员函数的前后作用const在后面，表示这个成员函数不会修改成员变量，即这是一个常量的成员函数，修饰成员函数的属性； const在前面，表示返回的引用不能被修改，不能通过返回的引用来修改成员变量。即返回值是const，修饰的是返回的变量。 注意：常量只能调用常量的成员函数，不能调用非常量的成员函数。而非常量的成员函数可以调用非常量和常量的成员函数。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:55" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          大Vector作为局部变量返回注意事项
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%A7Vector%E4%BD%9C%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%94%E5%9B%9E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+        <div>
+          大Vector作为局部变量返回注意事项1、要注意避免拷贝或赋值操作，可以使用std::move移动语义，把左值变为一个右值引用，被外面一个左值接受。 12345std::vector&lt;int&gt; functionWithMoveReturn() &#123;    std::vector&lt;int&gt; myVector = &#123;1, 2, 3, 4, 5&#125;;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:55" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+          在Linux中如何通过一行命令找到文件夹里面的关键字
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%9C%A8Linux%E4%B8%AD%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%BE%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+        <div>
+          在Linux中如何通过一行命令找到文件夹里面的关键字1、find单独使用2 、使用find+ xargs 进行操作3、使用grep查找某目录下包含关键字内容的文件 1、find 单独使用：&#96;&#96;find命令用于在指定目录及其子目录中查找文件。你可以通过-name选项指定要搜索的文件名模式，然后使用-exec&#96; 选项执行相应的操作。 示例： 1234567find /path/
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 17:53" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/07/31/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1/" target="_self">
           单例模式的设计
         </a>
@@ -317,242 +548,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
-          windows中使用socket
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/windows%E4%B8%AD%E4%BD%BF%E7%94%A8socket/" target="_self">
-        <div>
-          windows中使用socket前需要使用WSAStratup函数WSAStartup()函数负责初始化Winsock DLL（动态链接库），它是Windows上实现Socket API的库。 12345WSAData wsa;//Winsock版本2.2//1.1早期版本，功能不足，现在一般使用2.2WSAStartup(MAKEWORD(2, 2), &amp;wsa);  WSACleanu
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:30" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
-          内存中的“cc”
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E2%80%9Ccc%E2%80%9D/" target="_self">
-        <div>
-          内存中的“cc”代表的是十六进制数 0xCC，在汇编语言和低级编程中与 int 3 指令关联，当 CPU 遇到 int 3 指令时，它会触发一个异常，这通常被调试器捕获。 通常用于程序报错和调试，打断点的时候会有cc 未初始化的内存也有可能有cc，这个在调试模式下面可以告诉程序员这里出错了。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:29" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
-          无法解析的外部命令问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E6%97%A0%E6%B3%95%E8%A7%A3%E6%9E%90%E7%9A%84%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          无法解析的外部命令1、有函数声明了但是没有实现 2、头文件A可能依赖于头文件B中的某个类型或声明。如果包含顺序颠倒，即先包含B后包含A，那么A中使用B中的类型或声明的部分可能在编译时找不到相应的定义，因为B还未被包含。 3、在C++中，如果一个头文件在命名空间外部定义了符号，而另一个头文件在命名空间内部定义了同名符号，那么包含顺序也可能导致链接错误，因为编译器可能无法正确解析这些符号的链接 编译问
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:27" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
-          头文件循环引用和重定义问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/%E5%A4%B4%E6%96%87%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          防止头文件循环引用比如一个头文件a引用头文件b，头文件b需要引用头文件a，则需要在其中一个头文件中，比如在头文件b中使用a中类的声明，然后在b的cpp文件中使用a的头文件可以解决。 头文件引发的重定义问题重定义产生的情况  情况一：多个源文件包含了同一个头文件时，如果头文件中有某个局部变量或者非内联函数的定义，那么相当于每个源文件都把该局部变量或者非内联函数定义了一次。而它们（局部变量或者非内联函
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:26" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-          ifndef和pragma once的区别
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/ifndef%E5%92%8Cpragma-once%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
-        <div>
-          ifndef和pragma once的区别1）#ifndef  #ifndef的方式受C&#x2F;C++语言标准支持。它不仅可以保证同一个文件不会被包含多次，也能保证相同的代码段不会被重复包含（比如定义了相同的类）  当然，缺点就是  如果不同头文件中的宏名（也就是ifndef后面的名字）不小心“撞车”，可能就会导致你看到头文件明明存在，但编译器却硬说找不到声明的状况——这种情况有时非常让人郁闷
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:25" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
-          Qt事件处理机制
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
-        <div>
-          Qt事件处理机制事件：  来源是系统中的中断，包括与Qt相关的中断（如硬件操作控制产生的中断）和程序中的定时器产生的中断 Qt程序中通过QEvent基类来表示各种类型的事件。  QApplication对象负责监听整个应用程序中所有控件的事件。 Qt事件处理器机制： ​		由exec执行的事件循环在监听整个应用程中所有事件，收到事件通知的控件通过过滤及分发函数，到达事件处理函数。 事件与Qt信号槽
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:23" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
-          Qt中的事件分发过程
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/31/Qt%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E8%BF%87%E7%A8%8B/" target="_self">
-        <div>
-          Qt中的事件分发过程 当事件产生之后，Qt 使用应用程序对象调用 notify() 函数将事件发送到指定的窗口： 1[override virtual] bool QApplication::notify(QObject *receiver, QEvent *e);  事件在发送过程中可以通过事件过滤器进行过滤，默认不对任何产生的事件进行过滤。 1[virtual] bool QObject::e
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-31 17:22" pubdate>
-              2024-07-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
