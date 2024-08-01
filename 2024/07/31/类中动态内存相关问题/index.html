@@ -24,8 +24,9 @@
 <meta property="og:description" content="类中动态内存相关问题不能在类声明中初始化静态成员变量，因为类声明只是描述了如何分配内存，但是不实际分配内存。但是如果静态成员是const或者枚举类型，则可以在类声明中初始化。 +++ 问：为什么要有析构函数？ 答：当删除类对象的时候可以释放掉对象本身所占用的内存，但是并不能自动释放属于对象成员指针所指向的内存。因此必须使用析构函数，在析构函数中使用delete来保证当对象过期时，可以释放掉由new">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-31T10:00:22.000Z">
-<meta property="article:modified_time" content="2024-07-31T10:00:38.410Z">
+<meta property="article:modified_time" content="2024-08-01T15:19:05.464Z">
 <meta property="article:author" content="Chen Jin">
+<meta property="article:tag" content="实践">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -314,6 +315,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%9E%E8%B7%B5/" class="print-no-link">#实践</a>
+      
+    </div>
   
 </div>
 

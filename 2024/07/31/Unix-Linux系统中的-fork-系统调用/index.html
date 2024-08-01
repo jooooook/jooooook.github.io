@@ -24,8 +24,9 @@
 <meta property="og:description" content="使用Unix&#x2F;Linux系统中的fork()系统调用时，需要注意的线程与进程之间的关系和潜在问题  线程无法被复制：fork()发生时，只有调用fork()的那个线程会被复制到子进程中，其他的线程不会被复制过去。 破坏多线程模式：如果父进程中某个线程负责资源的初始化或清理，而在子进程中这个线程不存在，那么可能会导致资源未被正确管理，进而引发错误。 先准备好进程结构，再去使用线程：涉及fo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-31T07:35:14.410Z">
-<meta property="article:modified_time" content="2024-07-31T07:39:02.135Z">
+<meta property="article:modified_time" content="2024-08-01T15:17:02.829Z">
 <meta property="article:author" content="Chen Jin">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -299,6 +300,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
+      
+    </div>
   
 </div>
 

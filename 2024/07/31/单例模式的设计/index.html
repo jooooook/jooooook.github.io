@@ -24,8 +24,9 @@
 <meta property="og:description" content="单例模式意图：保证每一个类仅有一个实例，并为它提供一个全局访问点。（一些管理功能的类，需要统筹全局） 如何保证单例模式是线程安全的  使用双重检查锁，先检查是否被初始化，然后在上锁，然后在检查是否被初始化，没有被初始化就初始化在返回。  使用静态局部变量，因为C++11中静态变量的初始化时线程安全的，具体而言，静态局部变量的初始化保证只发生一次，并且这个初始化过程是线程安全的。这意味着，即使多个线">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-31T09:51:25.000Z">
-<meta property="article:modified_time" content="2024-07-31T09:51:58.649Z">
+<meta property="article:modified_time" content="2024-08-01T15:19:44.924Z">
 <meta property="article:author" content="Chen Jin">
+<meta property="article:tag" content="实践">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -306,6 +307,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%9E%E8%B7%B5/" class="print-no-link">#实践</a>
+      
+    </div>
   
 </div>
 
