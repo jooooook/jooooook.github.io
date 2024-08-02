@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen Jin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="iocp异步编程流程 创建I&#x2F;O完成端口: 使用CreateIoCompletionPort函数创建一个I&#x2F;O完成端口。这个端口将作为异步操作完成时的通知中心，需要与套接字关联。  HANDLE CreateIoCompletionPort(  HANDLE FileHandle,  HANDLE ExistingCompletionPort,  ULONG_PTR Compl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOCP异步编程">
+<meta property="og:url" content="https://jooooook.github.io/2024/07/26/IOCP%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Jin&#39;s study notes">
+<meta property="og:description" content="iocp异步编程流程 创建I&#x2F;O完成端口: 使用CreateIoCompletionPort函数创建一个I&#x2F;O完成端口。这个端口将作为异步操作完成时的通知中心，需要与套接字关联。  HANDLE CreateIoCompletionPort(  HANDLE FileHandle,  HANDLE ExistingCompletionPort,  ULONG_PTR Compl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-25T17:06:19.000Z">
+<meta property="article:modified_time" content="2024-08-01T15:36:45.917Z">
+<meta property="article:author" content="Chen Jin">
+<meta property="article:tag" content="实践 windows">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>IOCP异步编程 - Jin&#39;s study notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"jooooook.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Home</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="IOCP异步编程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-26 01:06" pubdate>
+          2024年7月26日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">IOCP异步编程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="iocp异步编程流程"><a href="#iocp异步编程流程" class="headerlink" title="iocp异步编程流程"></a>iocp异步编程流程</h1><ol>
+<li><p><strong>创建I&#x2F;O完成端口</strong>: 使用<code>CreateIoCompletionPort</code>函数创建一个I&#x2F;O完成端口。这个端口将作为异步操作完成时的通知中心，需要与套接字关联。</p>
+<blockquote>
+<p><code>HANDLE CreateIoCompletionPort(  HANDLE FileHandle,  HANDLE ExistingCompletionPort,  ULONG_PTR CompletionKey,  DWORD NumberOfConcurrentThreads );</code></p>
+<ol>
+<li><strong>FileHandle</strong>：要与新创建或已存在的I&#x2F;O完成端口关联的文件句柄。首次创建IOCP传入<code>INVALID_HANDLE_VALUE</code>，表示仅创建一个空的I&#x2F;O完成端口。</li>
+<li><strong>ExistingCompletionPort</strong>：一个已存在的I&#x2F;O完成端口句柄。如果想将<code>FileHandle</code>关联到这个已存在的I&#x2F;O完成端口上，就提供这个句柄；如果是要创建一个新的I&#x2F;O完成端口，则此参数应为<code>NULL</code>。</li>
+<li><strong>CompletionKey</strong>：一个无符号长整数，由应用程序提供，作为完成键（Completion Key）。当一个I&#x2F;O操作完成时，这个键会随着完成通知一起返回给应用程序，用于标识完成的I&#x2F;O操作或与之关联的上下文。</li>
+<li><strong>NumberOfConcurrentThreads</strong>：指定工作线程池中可以同时运行的线程的最大数目。如果设置为0，则系统将自动调整线程数量以达到最佳性能。通常，合理的线程数取决于系统的CPU核心数和I&#x2F;O负载。</li>
+</ol>
+<p>具体：<code>m_HIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 4);</code></p>
+<ul>
+<li>成功时，返回新创建或已关联的I&#x2F;O完成端口的句柄。</li>
+<li>失败时，返回<code>NULL</code>，并可通过<code>GetLastError</code>获取错误码。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>创建并配置套接字</strong>: 使用<code>WSASocket</code>函数创建一个或多个套接字，并设置为使用重叠I&#x2F;O模型（通过<code>WSA_FLAG_OVERLAPPED</code>标志），允许套接字进行异步操作。</p>
+<blockquote>
+<p>具体：<code>m_servSocket = WSASocket(PF_INET, SOCK_STREAM, 0, NULL, 0, WSA_FLAG_OVERLAPPED);</code></p>
+<ul>
+<li><strong>af</strong>：地址族，如<code>AF_INET</code>用于IPv4或<code>AF_INET6</code>用于IPv6。</li>
+<li><strong>type</strong>：套接字类型，如<code>SOCK_STREAM</code>用于TCP连接，<code>SOCK_DGRAM</code>用于UDP数据报。</li>
+<li><strong>protocol</strong>：指定协议，通常为0，让系统根据<code>af</code>和<code>type</code>自动选择。</li>
+<li><strong>lpProtocolInfo</strong>：指向一个<code>WSAPROTOCOL_INFO</code>结构的指针，允许直接指定协议信息，提供更细粒度的控制。</li>
+<li><strong>g</strong>：保留，通常传入0。</li>
+<li><strong>dwFlags</strong>：标志位，如<code>WSA_FLAG_OVERLAPPED</code>表示创建支持重叠I&#x2F;O的套接字，这对于使用IOCP模型是必需的。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>绑定套接字到I&#x2F;O完成端口</strong>: 再次使用<code>CreateIoCompletionPort</code>函数将每个套接字与之前创建的I&#x2F;O完成端口关联。这一步确保与这些套接字相关的I&#x2F;O操作完成时，通知将被发送到I&#x2F;O完成端口。</p>
+<blockquote>
+<p>具体：<code>CreateIoCompletionPort((HANDLE)m_servSocket, m_HIOCP, 0, 0)</code></p>
+<ul>
+<li><strong>m_servSocket</strong>：要关联的套接字；</li>
+<li><strong>m_HIOCP</strong>：创建的完成端口</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>初始化OVERLAPPED结构</strong>: 对于每个异步操作（如<code>ConnectEx</code>, <code>ReadFile</code>, <code>WriteFile</code>, <code>WSARecv</code>, <code>WSASend</code>等），都需要创建并初始化一个或多个<code>OVERLAPPED</code>结构（或其派生类），这个结构包含了操作的状态信息和完成时的回调参数。这里除了原始的OVERLAPPED，还包括连接的其他重要参数信息</p>
+<blockquote>
+<p><code>CMClient* pClient = new CMClient(this,m_HIOCP);</code></p>
+</blockquote>
+</li>
+<li><p><strong>启动监听或连接操作</strong>: 根据需要，使用如<code>bind</code>, <code>listen</code>, <code>AcceptEx</code>等函数开始监听网络连接。对于客户端，可能直接使用<code>ConnectEx</code>进行异步连接。</p>
+<blockquote>
+<pre><code class="hljs">            AcceptEx(m_servSocket, pClient-&gt;m_clntSocket,
+                pClient-&gt;m_accept-&gt;m_buffer.data(),0,
+                sizeof(sockaddr_in) + 16,sizeof(sockaddr_in) + 16,
+                &amp;pClient-&gt;m_accept-&gt;m_received,&amp;pClient-&gt;m_accept-&gt;m_overlapped);
+</code></pre>
+</blockquote>
+</li>
+<li><p><strong>发起异步I&#x2F;O操作</strong>: 当准备读取或写入数据时，使用相应的异步函数，如<code>WSARecv</code>和<code>WSASend</code>，并将之前准备好的<code>OVERLAPPED</code>结构传递给这些函数。<strong>这些操作会立即返回，而不会等待I&#x2F;O完成</strong>。</p>
+</li>
+<li><p><strong>等待并处理I&#x2F;O完成通知</strong>: 在主线程或一个专用的工作线程中，使用<code>GetQueuedCompletionStatus</code>循环等待I&#x2F;O完成的通知。当一个I&#x2F;O操作完成时，这些函数会返回，并提供完成键、传输的字节数、以及指向关联的<code>OVERLAPPED</code>结构的指针。</p>
+<blockquote>
+<p>取出<code>OVERLAPPED</code>结构的指针进行下一步的处理，这里可以把指针转换为一个结构体，涉及到类的下行转换，虽然说理论上是不安全的，但是这里也没有使用dynamic_cast进行强制类型转换，因为传进去的时候其实就是一个派生类的m_overlapped成员变量，自己知道这个下行转换是安全的</p>
+</blockquote>
+</li>
+<li><p><strong>根据完成键和OVERLAPPED结构处理操作结果</strong>: 根据<code>OVERLAPPED</code>结构中的信息，确定操作类型（如读、写、接受连接等）并执行相应的后续处理。这可能包括数据处理、错误处理、再次发起读写操作等。然后就循环新连接，接受发送，然后等待异步处理</p>
+</li>
+</ol>
+<p><strong>这里要注意的是如果是处理了一个新连接的时候要重新创建一个客户端socket然后与io完成端口绑定，才能接受新的连接</strong></p>
+<h1 id="AcceptEx函数以及与accept函数的区别"><a href="#AcceptEx函数以及与accept函数的区别" class="headerlink" title="AcceptEx函数以及与accept函数的区别"></a>AcceptEx函数以及与accept函数的区别</h1><p><code>AcceptEx</code>函数是Winsock2 扩展API的一部分，专用于Windows平台，用于异步接受TCP连接请求。它相比传统的<code>accept</code>函数提供了更多的功能和灵活性。</p>
+<h2 id="AcceptEx-函数介绍"><a href="#AcceptEx-函数介绍" class="headerlink" title="AcceptEx 函数介绍"></a>AcceptEx 函数介绍</h2><ul>
+<li><strong>功能</strong>：<code>AcceptEx</code>函数允许服务器端在同一个调用中完成接受连接请求和接收连接套接字的<strong>初始化工作</strong>，同时还能<strong>从连接请求中提取客户端地址信息</strong>。它支持重叠I&#x2F;O模型，因此可以与I&#x2F;O完成端口（IOCP）结合，实现高效的异步接受处理。</li>
+<li><strong>参数</strong>：<code>AcceptEx</code>接受多个参数，包括监听套接字、新的接受套接字（预先创建）、用于存储连接数据的缓冲区、缓冲区偏移量以及指向接收缓冲区大小和接收的地址信息的指针。它还接受一个<code>OVERLAPPED</code>结构的指针，用于异步操作的完成通知。</li>
+<li><strong>缓冲区共享</strong>：<code>AcceptEx</code>使用一个共享的缓冲区来<strong>同时接收连接请求数据和客户端地址信息</strong>，这有助于减少系统调用和内存分配，提高效率。</li>
+</ul>
+<h2 id="与accept的区别"><a href="#与accept的区别" class="headerlink" title="与accept的区别"></a>与accept的区别</h2><ol>
+<li><strong>异步支持</strong>：<code>accept</code>函数在默认情况下是<strong>阻塞</strong>的，即调用它时，如果没有新的连接请求到达，调用线程会被阻塞，直到连接请求到来。而<code>AcceptEx</code>设计用于异步操作，结合重叠I&#x2F;O和I&#x2F;O完成端口，可以避免阻塞，提高服务器的响应性和处理能力。</li>
+<li><strong>连接初始化</strong>：<code>accept</code>函数接受连接后会返回一个新的套接字，而这个新套接字需要进一步的配置，如设置为非阻塞模式、绑定、设置选项等。<code>AcceptEx</code>则允许在函数调用时直接指定并初始化这个新套接字，减少了额外的配置步骤。</li>
+<li><strong>数据接收</strong>：<code>AcceptEx</code>在接受连接的同时，可以读取连接请求的初始数据，<code>accept</code>不能。</li>
+<li><strong>缓冲区管理</strong>：如前所述，<code>AcceptEx</code>使用共享缓冲区来存储连接数据和地址信息，而<code>accept</code>不涉及缓冲区管理，只负责接受连接。</li>
+<li><strong>平台特定</strong>：<code>AcceptEx</code>是Windows特有的，而<code>accept</code>则是POSIX标准的一部分，跨平台兼容性更好。</li>
+</ol>
+<h1 id="设置重叠io的技巧"><a href="#设置重叠io的技巧" class="headerlink" title="设置重叠io的技巧"></a>设置重叠io的技巧</h1><p>​	重叠io是关联了一个客户端连接的，具体的可以关联到一个客户端的某个操作，包括发送、接受、创建和关闭，也就是说重叠io是跟某一个客户端关联的，所以我们可以在重叠io这里设置了一个类，类里面的第一个成员变量是重叠io，后面的成员变量客户端连接的状态信息，包括客户端连接的上下文信息，I&#x2F;O操作类型，实际接受到的字节数，数据缓冲区这些信息。这样的话，在收到完成端口传出来的重叠io的时候就可以进行类型转换，然后得到这个客户端连接的状态信息。</p>
+<p>​	对于不同操作对应的重叠io，可以把它设置为一个重叠io的派生类，包括发送，接受，创建，关闭这四个派生类，派生类里面的关键是一个回调函数，每个操作都会有一个回调函数。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%9E%E8%B7%B5-windows/" class="print-no-link">#实践 windows</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/26/%E5%9F%BA%E4%BA%8EI-O-%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97/" title="基于I/O 完成端口的多线程安全队列">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基于I/O 完成端口的多线程安全队列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%B1%BB%E8%AE%BE%E8%AE%A1/" title="线程池类设计">
+                        <span class="hidden-mobile">线程池类设计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"VyPSy8RT2VJfZFYVrZj3JG8x-MdYXbMMI","appKey":"ZlexrllD9JhSwVuoGZRbBpwy","path":"window.location.pathname","placeholder":"吐槽一哈!!!!","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://vypsy8rt.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
